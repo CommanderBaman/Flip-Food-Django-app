@@ -1,0 +1,27 @@
+{% extends 'food_delivery/base.html' %}
+
+{% load static %}
+
+{% block header %}
+	About Us
+{% endblock header %}
+
+{% block main-content %}
+	<div class="row pb-5" >
+		<div class="col-lg-4 m-3 text-center">
+			<img src="{% static 'food_delivery/about-profilepic.jpg' %}" alt="Profile Photo of Shubham Ojha" class="rounded img-thumbnail" style="max-height: 500px;">
+		</div>
+		<div class="col-lg-6 py-4 px-4 m-3">
+			This is a Food Delivery App made by <b>Shubham Ojha</b>.<br> <br>
+			He is currently studying Electrical Engineering from IIT Bombay. He likes to play football in his free time. This website was developed as an assignment for the Web Development course during the Learner's Space 2020. <br> <br>
+			Made Using: <br>
+			<ul class="list-group col-lg-6">
+				<li class="list-group-item">Django</li>
+				<li class="list-group-item">BootStrap 4</li>
+				<li class="list-group-item">Font Awesome 5</li>
+			</ul>
+			<!-- Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste obcaecati necessitatibus, quisquam, maxime pariatur in ullam quibusdam, non earum cum vel culpa! Incidunt earum nostrum, non nesciunt dolores tempore quo veniam velit adipisci voluptate quos ex perspiciatis voluptatum officiis exercitationem suscipit minima maxime praesentium dolorum excepturi dolore, corrupti architecto. Necessitatibus? -->
+		</div>
+	</div>
+	
+{% endblock main-content %}

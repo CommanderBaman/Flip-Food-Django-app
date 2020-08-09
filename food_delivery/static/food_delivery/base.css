@@ -1,0 +1,47 @@
+.body {
+	margin: 0;
+	padding: 0;
+	background-color: #ECECEC;
+	padding-top: 70px;
+}
+
+
+.navbar {
+    background-image: linear-gradient(to bottom right, #90CCF4, #5DA2D5);
+}
+
+.navbar .navbar-brand img {
+	height: 13.5vh;
+}
+
+.nav-link, .navbar-brand {
+	color: #2f2f2f;
+	font-size: 1.3em;
+}
+
+.nav-link {
+	margin-right: 1em !important;
+	transition-duration: 0.3s;
+}
+
+.navbar-collapse {
+	justify-content: flex-end;
+  }
+
+.nav-link:hover {
+	color: #bb4646;
+}
+
+
+.main-content {
+	width: 80%;
+	margin: auto;
+}
+
+footer {
+	background-color: #eaeaea;
+}
+
+footer .page-footer a {
+	background-color: black;
+}

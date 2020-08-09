@@ -5,14 +5,72 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>FoodFlip</title>
 
+	<!-- personal CSS and favicons -->
+	{% load static %}
+	<link rel="shortcut icon" href="{% static 'food_delivery/foodflip-favicon.png' %}" type="image/x-icon">
+	<link rel="stylesheet" href="{% static 'food_delivery/base.css' %}">
+
 	<!-- bootstrap CSS  -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<!-- FontAwesome Icons -->
+    <script src="https://kit.fontawesome.com/4106bd1142.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>base</h1>
+	<!-- 
+		Color Scheme:
+		white = #ECECEC
+		red = #F78888
+		yellow = #F3D250
+		light blue = #90CCF4
+		blue = #5DA2D5
+	-->
 
-	
-	
+	<!-- making navbar  -->
+	<nav class="navbar navbar-expand-md navbar-fixed-top">
+		<a class="navbar-brand" href="#"><img src="{% static 'food_delivery/foodflip-logo.png' %}" alt="FoodFlip Logo"></a>
+		<button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="main-navigation">
+			<ul class="navbar-nav">
+				<!-- {% if title != '' %} -->
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'food-delivery-home' %}">Home</a>
+				</li>
+				<!-- {% endif %} -->
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'food-delivery-about' %}">About Us</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'food-delivery-cart' %}">Cart <i class="fas fa-shopping-cart" style="font-size: 1.3em;"></i></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'users-login' %}">Login</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'users-register' %}">Register</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container-lg">
+		<h1 class="text-center py-5">
+			{% block header %}
+			{% endblock header %}
+		</h1>
+		{% block main-content %}
+		{% endblock main-content %}
+	</div>
+
+	<!-- making footer -->
+	<footer class="page-footer font-small fixed-bottom text-center py-3">
+		<div class="container-lg">
+			<div class="footer-copyright text-muted">
+				<i class="far fa-copyright"></i> 2020 Copyright: <a href="https://commanderbaman.github.io/19D070056_WEB_DEV/">Shubham Ojha</a> 
+			</div>
+		</div>
+	</footer>
 	
 	<!-- JS files for bootstrap -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -8,6 +8,11 @@ def main( request):
     context = {}
     return render( request, 'food_delivery/main.html', context)
 
+# shows the about us page
+def about( request):
+    context = {}
+    return render( request, 'food_delivery/about.html', context)
+
 #shows the cart of the user 
 def cart( request):
     context = {}
