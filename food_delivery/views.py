@@ -5,12 +5,20 @@ from django.template import loader
 
 from .models import Food
 
+from django.views.generic import ListView, DetailView
+
+
 # main page of the food delivery system
-def main( request):
-    context = {
-        'foods' : Food.objects.all(), 
-    }
-    return render( request, 'food_delivery/main.html', context)
+class FoodListView(ListView):
+    model = Food
+    template_name = 'food_delivery/main.html'
+    context_object_name = 'foods'
+    ordering = ['-datePosted']
+
+class FoodDetailView(DetailView):
+    model = Food
+    template_name = 'food_delivery/food-detail.html'
+    context_object_name = 'food'
 
 # shows the about us page
 def about( request):

@@ -1,0 +1,51 @@
+{% extends 'food_delivery/base.html' %}
+
+{% block header %}
+	{{ food.name}}
+{% endblock header %}
+
+{% block main-content %}
+	<div class="row pb-5" >
+		<div class="col-lg-4 m-3 text-center">
+            <img src="{{ food.image.url }}" alt="Profile Photo of Shubham Ojha" class="rounded img-thumbnail" style="max-height: 500px;">
+            <div class="food-price p-1">
+                <i class="fas fa-rupee-sign"></i>{{ food.actualValue }} <br>
+                <span class="text-muted" style="text-decoration:line-through">
+                    <i class="fas fa-rupee-sign"></i>{{food.price}}
+                </span> 
+            </div>
+            {% if food.isAvailable %}
+                <div class="btn btn-primary p-2 m-2">
+                    Add to Cart <i class="fas fa-shopping-cart"></i>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-lg-7 py-4 px-4 m-3">
+            {{ food.description }} <br>
+
+            <div class="table table-responsive mt-3" >
+                <table class="table-hover table-bordered" id="food-info-table">
+                    <tbody>
+                        <tr>
+                            <th scope="row" >Ingredients Used</th>
+                            <td >{{food.ingredients}}</td>
+                        </tr>
+                        <tr>        
+                            <th scope="row" >Made by</th>
+                            <td ><a href="{{ food.seller.url }}">{{ food.seller }}</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" >Last Updated On</th>
+                            <td >{{ food.datePosted|date:'F d, Y' }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" >Available</th>
+                            <td >{% if food.isAvailable %} Yes {% else %} No <i class="far fa-frown-open"></i> Please come back later to check if its available {% endif %}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+	
+{% endblock main-content %}

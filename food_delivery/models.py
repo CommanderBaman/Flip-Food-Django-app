@@ -13,7 +13,7 @@ class Food( models.Model):
     datePosted = models.DateTimeField( auto_now= True)
 
     # created by the seller
-    seller = models.ForeignKey( User, on_delete= models.CASCADE)
+    seller = models.ForeignKey( User, on_delete= models.CASCADE, default= 1)
 
     # making images required - Pillow needs to installed
     image = models.ImageField( blank= False, null= True, upload_to= 'foods')
@@ -26,6 +26,9 @@ class Food( models.Model):
 
     # quantity available
     quantity = models.IntegerField( default= 0)
+
+    # ingredients used by the user
+    ingredients = models.TextField( default= 'Details not provided by Chef.')
 
     @property
     def isAvailable( self):
