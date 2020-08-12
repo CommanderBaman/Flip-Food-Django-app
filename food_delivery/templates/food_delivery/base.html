@@ -41,20 +41,36 @@
 				<li class="nav-item">
 					<a class="nav-link" href="{% url 'food-delivery-about' %}">About Us</a>
 				</li>
+				{% if user.is_authenticated %}
 				<li class="nav-item">
 					<a class="nav-link" href="{% url 'food-delivery-cart' %}">Cart <i class="fas fa-shopping-cart" style="font-size: 1.3em;"></i></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{% url 'users-login' %}">Login</a>
+					<a class="nav-link" href="{% url 'users-logout' %}">Logout</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{% url 'users-register' %}">Register</a>
+					<a href="{% url 'users-profile' %}" class="nav-link">Welcome! {{user.username}}</a>
 				</li>
+				{% else %}
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'users-login' %}">Login</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'users-register' %}">Register</a>
+					</li>
+				{% endif %}
 			</ul>
 		</div>
 	</nav>
 
 	<div class="container-lg">
+		{% if messages %}
+			{% for message in messages %}
+				<div class="text-center alert alert-{{ message.tags }}">
+					{{ message }}
+				</div>
+			{% endfor %}
+		{% endif %}
 		<h1 class="text-center py-5">
 			{% block header %}
 			{% endblock header %}

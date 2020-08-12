@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # user installed apps
     'food_delivery.apps.FoodDeliveryConfig',
     'users.apps.UsersConfig',
+    'crispy_forms', # need to install the django-crispy-forms from pip
 ]
 
 MIDDLEWARE = [
@@ -126,5 +127,25 @@ STATIC_URL = '/static/'
 
 
 # user defined settings
+
+# for food photos
 MEDIA_URL = '/media/'
-MEDIA_ROOT = 'media'
+MEDIA_ROOT = os.path.join( BASE_DIR, 'media')
+
+# for forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# for login redirection
+LOGIN_REDIRECT_URL = 'food-delivery-home'
+LOGIN_URL = 'users-login'
+
+# logging in gmail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+#using the environment variables to access the username and password 
+EMAIL_HOST_USER = 'shubhamojha18@gmail.com'
+EMAIL_HOST_PASSWORD = 'okiwiwmqehfsgzzh'
+DEFAULT_FROM_EMAIL = 'FlipFood <noreply@foodflip.com>'
