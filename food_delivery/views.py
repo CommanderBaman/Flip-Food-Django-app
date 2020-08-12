@@ -3,9 +3,13 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 
+from .models import Food
+
 # main page of the food delivery system
 def main( request):
-    context = {}
+    context = {
+        'foods' : Food.objects.all(), 
+    }
     return render( request, 'food_delivery/main.html', context)
 
 # shows the about us page
@@ -27,3 +31,4 @@ def checkout( request):
 def confirmed( request):
     context = {}
     return render( request, 'food_delivery/confirmed.html', context)
+

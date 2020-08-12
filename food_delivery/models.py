@@ -1,12 +1,19 @@
 from django.db import models
 
 # Create your models here.
+from django.contrib.auth.models import User
 
 # this contains all the food items that can be bought
 class Food( models.Model):
     # name and description of food
     name = models.CharField( max_length= 75)
-    description = models.CharField( max_length= 200)
+    description = models.TextField()
+
+    # date to be updated every time this is updated
+    datePosted = models.DateTimeField( auto_now= True)
+
+    # created by the seller
+    seller = models.ForeignKey( User, on_delete= models.CASCADE)
 
     # making images required - Pillow needs to installed
     image = models.ImageField( blank= False, null= True, upload_to= 'foods')
@@ -23,6 +30,10 @@ class Food( models.Model):
     @property
     def isAvailable( self):
         return self.quantity > 0
+
+    @property
+    def actualValue( self):
+        return self.price - self.discount
 
     def __str__(self):
         return self.name

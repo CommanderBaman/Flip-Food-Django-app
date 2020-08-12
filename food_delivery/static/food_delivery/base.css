@@ -16,7 +16,7 @@
 
 .nav-link, .navbar-brand {
 	color: #2f2f2f;
-	font-size: 1.3em;
+	font-size: 1.2em;
 }
 
 .nav-link {
@@ -34,7 +34,7 @@
 
 
 .main-content {
-	width: 80%;
+	width: 100%;
 	margin: auto;
 }
 

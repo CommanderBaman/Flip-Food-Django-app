@@ -1,5 +1,37 @@
 {% extends 'food_delivery/base.html' %}
 
+{% load static %}
+{% block header %}
+Flip Food
+{% endblock header %}
+
 {% block main-content %}
-    Main Page
+    <link rel="stylesheet" href="{% static 'food_delivery/main.css' %}">
+    <h4 class="text-center">
+        Let's buy some mouth watering goodies. Scroll down for more options. 
+    </h4>
+    <div class="row mb-5 text-center" style="align-content: center;" id = "food-cards-container">
+        {% for food in foods %}
+        <div class="col-md-5 border p-5 m-4 rounded text-center pb-0 food-card" >
+            <!-- <div class="p-5"> -->
+                <img src="{{ food.image.url }}" alt="{{ food.name }}'s Image'" class="main-food-photo">
+            <!-- </div> -->
+            <div class="food-content p-4">
+                <h5>{{ food.name }}</h5>    
+                <div class="food-price p-1">
+                    <i class="fas fa-rupee-sign"></i>{{ food.actualValue }} <br>
+                    <span class="text-muted" style="text-decoration:line-through">
+                        <i class="fas fa-rupee-sign"></i>{{food.price}}
+                    </span> 
+                </div>
+                <div class="btn btn-primary p-2 m-2">
+                    Add to Cart <i class="fas fa-shopping-cart"></i>
+                </div>
+            </div>
+            <div class="clear" style="content:'';clear:both;"></div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock main-content %}
+
+{{ food.datePosted|date:'F d, Y' }}
