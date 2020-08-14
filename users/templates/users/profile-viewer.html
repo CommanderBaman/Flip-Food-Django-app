@@ -1,0 +1,23 @@
+{% extends 'food_delivery/base.html' %}
+
+{% load crispy_forms_tags %}
+{% block header %}
+    {{ userProfile.username}}'s Information
+{% endblock header %}
+
+{% block main-content %}
+<div class="row pb-5" >
+    <div class="col-lg-4 m-3 center media">
+        <img src="{{ userProfile.profile.image.url }}" alt="Profile Photo of {{ userProfile.username }}" class="text-center img-thumbnail" style="max-height: 500px; min-width:200px;">
+    </div>
+    <div class="col-lg-6 py-4 px-4 m-3">
+        <h2>{{ userProfile.username }} </h2>
+        <p>
+            Email: <a href="mailto:{{ user.email }}">{{ userProfile.email }}</a> <br>
+            Address: {{ userProfile.address }}
+        </p> 
+        </div>
+
+    </div>
+</div>    
+{% endblock main-content %}

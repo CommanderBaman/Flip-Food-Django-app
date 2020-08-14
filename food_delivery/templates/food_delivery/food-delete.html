@@ -1,0 +1,25 @@
+{% extends 'food_delivery/base.html' %}
+
+{% load crispy_forms_tags %}
+{% block header %}
+Delete Food
+{% endblock header %}
+
+{% block main-content %}
+<form method="post" class="mb-5 pb-4 ">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        Are you sure you want to delete the post "{{ food.title }}"
+        {{ form|crispy }}
+    </fieldset>
+    <div class="form-group text-center">
+        <button class="btn btn-outline-danger px-5 m-3" type="submit">
+            Yes, Delete
+        </button>
+        <a class="btn btn-outline-secondary px-5 m-3" href="{% url 'food-delivery-food-detail' food.id %}">
+            No, Cancel
+        </a>
+    </div>
+</form>
+
+{% endblock main-content %}

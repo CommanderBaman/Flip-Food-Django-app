@@ -1,0 +1,21 @@
+{% extends 'food_delivery/base.html' %}
+
+{% load crispy_forms_tags %}
+{% block header %}
+Add Food
+{% endblock header %}
+
+{% block main-content %}
+<form method="post" class="mb-5 pb-4 ">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        {{ form|crispy }}
+    </fieldset>
+    <div class="form-group text-center">
+        <button class="btn btn-outline-info px-5" type="submit">
+            Submit
+        </button>
+    </div>
+</form>
+
+{% endblock main-content %}

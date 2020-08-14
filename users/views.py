@@ -10,6 +10,10 @@ from .forms import UserRegisterationForm, UserUpdateForm, ProfileUpdateForm
 # to prevent some pages from being opened up because of not logged in
 from django.contrib.auth.decorators import login_required
 
+from django.contrib.auth.models import User
+
+# getting 404 page
+from django.shortcuts import get_object_or_404
 
 # used for registering users
 def register( request):
@@ -56,4 +60,10 @@ def profile( request):
     }
     return render( request, 'users/profile.html', context)
 
-
+# for viewing profile by outside people
+def profileViewer( request, sellerName):
+    profile = get_object_or_404( User, username= sellerName)
+    context = {
+        'userProfile':profile, 
+    }
+    return render( request, 'users/profile-viewer.html', context)

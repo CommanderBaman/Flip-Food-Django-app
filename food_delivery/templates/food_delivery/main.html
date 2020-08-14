@@ -8,16 +8,16 @@ Flip Food
 {% block main-content %}
     <link rel="stylesheet" href="{% static 'food_delivery/main.css' %}">
     <h4 class="text-center">
-        Let's buy some mouth watering goodies. Scroll down for more options. 
+        Let's eat some mouth watering goodies. Scroll down for more options. 
     </h4>
-    <div class="row mb-5 text-center" style="align-content: center;" id = "food-cards-container">
+    <div class="row text-center" style="align-content: center;" id = "food-cards-container">
         {% for food in foods %}
         <div class="col-md-5 border p-5 m-4 rounded text-center pb-0 food-card" >
             <!-- <div class="p-5"> -->
                 <img src="{{ food.image.url }}" alt="{{ food.name }}'s Image'" class="main-food-photo">
             <!-- </div> -->
             <div class="food-content p-4">
-                <h5>{{ food.name }}</h5>    
+                <a href="{% url 'food-delivery-food-detail' food.id %}"><h5>{{ food.name }}</h5></a>    
                 <div class="food-price p-1">
                     <i class="fas fa-rupee-sign"></i>{{ food.actualValue }} <br>
                     <span class="text-muted" style="text-decoration:line-through">
@@ -32,6 +32,26 @@ Flip Food
         </div>
         {% endfor %}
     </div>
+    <div class="text-center mt-4 mb-5">
+        {% if is_paginated %}
+            {% if page_obj.has_previous %}
+                <a href="?page=1" class="btn btn-outline-info m-1 mb-4 p-1">First</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-info m-1 mb-4 p-1 px-3" ><i class="fas fa-arrow-left"></i></a>
+            {% endif %}
+                
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <a href="?page={{ num }}" class="btn btn-info m-1 mb-4 p-1 px-2 rounded">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-info m-1 mb-4 p-1 px-3" ><i class="fas fa-arrow-right"></i></a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-info m-1 mb-4 p-1">Last</a>
+            {% endif %}
+
+        {% endif %}
+    </div>
+    <div class="m-5" style="content:'a'"></div>
 {% endblock main-content %}
 
-{{ food.datePosted|date:'F d, Y' }}

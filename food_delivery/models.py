@@ -3,6 +3,8 @@ from django.db import models
 # Create your models here.
 from django.contrib.auth.models import User
 
+from django.urls import reverse
+
 # this contains all the food items that can be bought
 class Food( models.Model):
     # name and description of food
@@ -28,7 +30,7 @@ class Food( models.Model):
     quantity = models.IntegerField( default= 0)
 
     # ingredients used by the user
-    ingredients = models.TextField( default= 'Details not provided by Chef.')
+    ingredients = models.TextField( default= 'Details not provided by Chef')
 
     @property
     def isAvailable( self):
@@ -42,4 +44,5 @@ class Food( models.Model):
         return self.name
         # return '{}: {}\nAvailable for Rs.{} after discount of Rs.{}'.format( self.name, self.description, self.price - self.discount, self.discount)
     
-    
+    def get_absolute_url(self):
+        return reverse( 'food-delivery-food-detail', kwargs={'pk':self.pk})

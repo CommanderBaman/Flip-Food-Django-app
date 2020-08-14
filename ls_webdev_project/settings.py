@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'food_delivery.apps.FoodDeliveryConfig',
     'users.apps.UsersConfig',
     'crispy_forms', # need to install the django-crispy-forms from pip
+    'cart.apps.CartConfig',
 ]
 
 MIDDLEWARE = [

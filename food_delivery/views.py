@@ -1,42 +1,86 @@
 from django.shortcuts import render
 
-from django.http import HttpResponse
-from django.template import loader
-
 from .models import Food
 
-from django.views.generic import ListView, DetailView
+# handling the display of the food objects
+from django.views.generic import ( 
+    ListView, 
+    DetailView, 
+    CreateView, 
+    UpdateView, 
+    DeleteView   
+)
 
+# to add the login required condition on classes
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # main page of the food delivery system
-class FoodListView(ListView):
+class FoodListView( ListView):
     model = Food
     template_name = 'food_delivery/main.html'
     context_object_name = 'foods'
     ordering = ['-datePosted']
+    paginate_by = 8
 
-class FoodDetailView(DetailView):
+# see details of a single food object
+class FoodDetailView( DetailView):
     model = Food
     template_name = 'food_delivery/food-detail.html'
     context_object_name = 'food'
+
+# to create a new food object
+class FoodCreateView( LoginRequiredMixin, CreateView):
+    model = Food
+    template_name = 'food_delivery/food-create.html'
+    context_object_name = 'food'
+
+    fields = ['name', 'description', 'quantity', 'ingredients', 'price', 'discount', 'image']
+
+    def form_valid( self, form):
+        form.instance.author = self.request.user
+        return super().form_valid( form)
+    
+
+# to update the food object details
+class FoodUpdateView( LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Food
+    template_name = 'food_delivery/food-create.html'
+    context_object_name = 'food'
+
+    fields = ['name', 'description', 'quantity', 'ingredients', 'price', 'discount', 'image']
+
+    def form_valid( self, form):
+        form.instance.author = self.request.user
+        return super().form_valid( form)
+    
+    def test_func( self):
+        fooder = self.get_object()
+        
+        # to avoid updates by other persons
+        if self.request.user == fooder.seller:
+            return True
+        return False
+
+# to delete the food object
+class FoodDeleteView( LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Food
+    template_name = 'food_delivery/food-delete.html'
+    context_object_name = 'food'
+
+    # sending to home page 
+    success_url = '/'
+
+    def test_func( self):
+        fooder = self.get_object()
+        
+        # to avoid updates by other persons
+        if self.request.user == fooder.seller:
+            return True
+        return False
+    
 
 # shows the about us page
 def about( request):
     context = {}
     return render( request, 'food_delivery/about.html', context)
-
-#shows the cart of the user 
-def cart( request):
-    context = {}
-    return render( request, 'food_delivery/cart.html', context)
-
-#shows the checkout page - contains payment option and estimated delivery time
-def checkout( request):
-    context = {}
-    return render( request, 'food_delivery/checkout.html', context)
-
-# returns the confirmation that the order is ordered
-def confirmed( request):
-    context = {}
-    return render( request, 'food_delivery/confirmed.html', context)
 

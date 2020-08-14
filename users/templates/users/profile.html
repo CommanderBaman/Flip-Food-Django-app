@@ -8,7 +8,7 @@
 {% block main-content %}
 <div class="row pb-5" >
     <div class="col-lg-4 m-3 center media">
-        <img src="{{ user.profile.image.url }}" alt="Profile Photo of Shubham Ojha" class="text-center img-thumbnail" style="max-height: 500px;">
+        <img src="{{ user.profile.image.url }}" alt="Profile Photo of {{ user.username }}" class="text-center img-thumbnail" style="max-height: 500px; min-width:200px;">
     </div>
     <div class="col-lg-6 py-4 px-4 m-3">
         <h2>{{ user.username }} </h2>
@@ -16,12 +16,25 @@
             Email: <a href="mailto:{{ user.email }}">{{ user.email }}</a> <br>
             Address: {{ user.address }}
         </p> 
+
+        <div class="mt-4">
+            If you want to sell food, create a page for your food on our page. 
+            <div class="text-center">
+                <a href="{% url 'food-delivery-create' %}" class="btn btn-primary mt-3 p-2 text-center">
+                    Create Food Page
+                </a>
+            </div>
+        </div>
+
     </div>
 </div>    
+
+
+<!-- user Information Update form -->
 <form method="post"  enctype="multipart/form-data" class="mb-5 pb-3">  <!-- this enctype is for image to save properly -->
     {% csrf_token %}
     <fieldset class="form-group">
-        <legend class="m-4">Profile Info</legend>
+        <legend class="mt-4 mb-4">Profile Info</legend>
         {{ userUpdateForm|crispy }}
         {{ profileUpdateForm|crispy }}
     </fieldset>

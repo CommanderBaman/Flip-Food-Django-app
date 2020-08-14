@@ -8,7 +8,7 @@
 	<div class="row pb-5" >
 		<div class="col-lg-4 m-3 text-center">
             <img src="{{ food.image.url }}" alt="Profile Photo of Shubham Ojha" class="rounded img-thumbnail" style="max-height: 500px;">
-            <div class="food-price p-1">
+            <div class="food-price p-4 ">
                 <i class="fas fa-rupee-sign"></i>{{ food.actualValue }} <br>
                 <span class="text-muted" style="text-decoration:line-through">
                     <i class="fas fa-rupee-sign"></i>{{food.price}}
@@ -32,7 +32,12 @@
                         </tr>
                         <tr>        
                             <th scope="row" >Made by</th>
-                            <td ><a href="{{ food.seller.url }}">{{ food.seller }}</a></td>
+                            <td ><a href="
+                                {% if food.seller == user %}
+                                    {% url 'users-profile' %}
+                                {% else %}
+                                    {% url 'users-profile-viewer' food.seller.username %}
+                                {% endif %}">{{ food.seller }}</a></td>
                         </tr>
                         <tr>
                             <th scope="row" >Last Updated On</th>
@@ -45,7 +50,19 @@
                     </tbody>
                 </table>
             </div>
+            
+            {% if food.seller == user %}
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="{% url 'food-delivery-food-detail-update' food.id %}" class="btn btn-info p-2 m-2 w-75">Update</a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'food-delivery-food-delete' food.id %}" class="btn btn-danger p-2 m-2 w-75">Delete</a>
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
+
 	
 {% endblock main-content %}
