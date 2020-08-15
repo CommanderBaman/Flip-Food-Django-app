@@ -1,16 +1,46 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here
 
 # for adding the login required condition on funtions
 from django.contrib.auth.decorators import login_required
-
+from food_delivery.models import Food
 
 #shows the cart of the user 
 @login_required
 def cart( request):
-    context = {}
+    context = {
+        'foodInfos': request.user.cart.foodinfo_set.all()
+    }
     return render( request, 'cart/cart.html', context)
+
+# increases or decreases the contents of a cart of a user
+@login_required
+def quantityHandle( request, foodPK, toIncrease):
+    foodToChange = get_object_or_404( request.user.cart.foodinfo_set, pk= foodPK )
+    # print(foodToChange)
+    # foodToChange = request.user.cart.foodinfo_set.get( pk = foodPK)
+    # print(foodToChange)
+    if toIncrease:
+        foodToChange.increaseQuantity()
+    else:
+        foodToChange.decreaseQuantity()
+    return redirect('cart-cart')
+
+# delete all the food items related to the cart
+@login_required
+def deleteCart( request):
+    for foodInfo in request.user.cart.foodinfo_set.all():
+        foodInfo.delete()
+    return redirect('cart-cart')
+
+# create food item for cart 
+@login_required
+def createFoodItem( request, foodPK):
+    foodItem = request.user.cart.foodinfo_set.create( food= Food.objects.get( pk= foodPK))
+    foodItem.save()
+
+    return redirect( 'food-delivery-home')
 
 #shows the checkout page - contains payment option and estimated delivery time
 @login_required

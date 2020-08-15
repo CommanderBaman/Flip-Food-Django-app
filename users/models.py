@@ -13,8 +13,8 @@ class Profile( models.Model):
     def __str__( self):
         return "{}'s Profile".format( self.user.username)
     
-    def save( self):
-        super().save()
+    def save( self, *args, **kwargs):
+        super().save( *args, **kwargs)
 
         # resizing image to fit the template better
         imageSaved = Image.open( self.image.path)

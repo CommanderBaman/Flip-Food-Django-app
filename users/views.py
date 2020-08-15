@@ -61,8 +61,8 @@ def profile( request):
     return render( request, 'users/profile.html', context)
 
 # for viewing profile by outside people
-def profileViewer( request, sellerName):
-    profile = get_object_or_404( User, username= sellerName)
+def profileViewer( request, userPK):
+    profile = get_object_or_404( User, pk = userPK)
     context = {
         'userProfile':profile, 
     }

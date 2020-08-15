@@ -24,9 +24,9 @@ Flip Food
                         <i class="fas fa-rupee-sign"></i>{{food.price}}
                     </span> 
                 </div>
-                <div class="btn btn-primary p-2 m-2">
+                <a href="{% url 'cart-cart-create-item' food.pk %}" class="btn btn-primary p-2 m-2">
                     Add to Cart <i class="fas fa-shopping-cart"></i>
-                </div>
+                </a>
             </div>
             <div class="clear" style="content:'';clear:both;"></div>
         </div>

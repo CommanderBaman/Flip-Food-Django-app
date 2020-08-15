@@ -8,7 +8,7 @@ urlpatterns = [
     path( 'register/', views.register, name= 'users-register'),
     path( 'logout/', auth_views.LogoutView.as_view( template_name='users/logout.html'), name= 'users-logout'),
     path( 'profile/', views.profile, name= 'users-profile'),
-    path( 'profile-viewer/<str:sellerName>', views.profileViewer, name= 'users-profile-viewer'),
+    path( 'profile-viewer/<int:userPK>', views.profileViewer, name= 'users-profile-viewer'),
     path( 'password-reset/', auth_views.PasswordResetView.as_view( template_name='users/password-reset.html'), name= 'users-password-reset'),
     path( 'password-reset/done/', auth_views.PasswordResetDoneView.as_view( template_name='users/password-reset-done.html'), name= 'password_reset_done'), # these 3 need to be this because of convention
     path( 'password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view( template_name='users/password-reset-confirm.html'), name= 'password_reset_confirm'),

@@ -1,5 +1,67 @@
 {% extends 'food_delivery/base.html' %}
 
+{% block header %}
+    Your Cart
+{% endblock header %}
+
 {% block main-content %}
-    Cart
+
+{% if foodInfos.count %}
+	<table class="table text-center w-100">
+		<thead>
+			<tr>
+				<th scope="col">S.No.</th>
+				<th scope="col">Food</th>
+				<th scope="col">Quantity</th>
+				<th scope="col">Cost Per Piece</th>
+				<th scope="col">Cost</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for foodInfo in foodInfos %}
+				<tr>
+					<th scope="row">{{ forloop.counter }}</th>
+					<td>{{ foodInfo.food.name }}</td>
+					<td>
+						<div class="d-lg-inline">
+							<a href="{% url 'cart-cart-quantity-handler' foodInfo.id 1 %}" class="text-success"><i class="fas fa-plus-square"></i></a> 
+							{{ foodInfo.quantity }}
+							<a href="{% url 'cart-cart-quantity-handler' foodInfo.id 0 %}" class="text-danger"><i class="fas fa-minus-square"></i></a>
+						</div>
+					</td>
+					<td>{{ foodInfo.food.actualValue }}</td>
+					<td>{{ foodInfo.foodCost }}</td>
+				</tr>
+			{% endfor %}
+			<tr>
+				<td colspan="3" class="border-right">Total Cost</td>
+				<td colspan="2">{{ user.cart.totalCost }}</td>
+			</tr>
+			<tr>
+				<td colspan="3" class="border-right">Savings</td>
+				<td colspan="2">{{ user.cart.totalSavings }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="p-3 text-center m-3">
+		<a href="{% url 'cart-cart-delete' %}" class="btn btn-danger w-25 p-2 m-3">
+			Clear Cart
+		</a>
+		<a href="{% url 'cart-checkout' %}" class="btn btn-success w-25 p-2 m-3">
+			Proceed To Checkout
+		</a>
+	</div>
+{% else %}
+	<div class="text-center">
+		<h4 class="text-secondary">Its lonely in here <i class="far fa-sad-tear" style="font-size:1.4em"></i></h4>
+		<a href="{% url 'food-delivery-home' %}" class="btn btn-info w-25 p-2 m-3">
+			Let's add something here
+		</a>
+	</div>
+	{% endif %}
+<div class="m-2 text-muted text-center mb-5 pb-5">
+	Last Edited on: {{ user.cart.datePosted|date:'F d, Y' }}
+</div>
+
+
 {% endblock main-content %}
