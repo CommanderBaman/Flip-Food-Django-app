@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     # user installed apps
     'food_delivery.apps.FoodDeliveryConfig',
     'users.apps.UsersConfig',
-    'crispy_forms', # need to install the django-crispy-forms from pip
+    #'crispy_forms', # need to install the django-crispy-forms from pip
     'cart.apps.CartConfig',
 ]
 
