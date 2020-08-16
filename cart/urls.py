@@ -9,4 +9,5 @@ urlpatterns = [
     path( 'cart/create/<int:foodPK>/<int:pageNumber>/', views.createFoodItemPaginated, name='cart-cart-create-item-paginated'),
     path( 'cart/<int:foodPK>/<int:toIncrease>/<int:toMain>/', views.quantityHandle, name='cart-cart-quantity-handler'),
     path( 'cart/delete/', views.deleteCart, name='cart-cart-delete'),
+    path( 'confirmed/delete/', views.confirmedDelete, name='cart-confirmed-delete'),
 ]

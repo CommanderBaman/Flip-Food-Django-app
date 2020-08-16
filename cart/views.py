@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from food_delivery.models import Food
 from django.contrib import messages
 
+from datetime import datetime, timedelta
+
 #shows the cart of the user 
 @login_required
 def cart( request):
@@ -71,5 +73,29 @@ def checkout( request):
 # returns the confirmation that the order is ordered
 @login_required
 def confirmed( request):
-    context = {}
-    return render( request, 'cart/confirmed.html', context)
+    today = datetime.now()
+    deliveryDay = today + timedelta( days= 3)
+    try:
+        foodInfos = request.user.cart.foodinfo_set.all()
+        foodInfo = foodInfos[0]
+        print( foodInfo)
+        messages.success( request, 'Food Ordered! Food to arrive in 3 days. Happy Meal.')
+        context = {
+            'foodInfos': foodInfos,
+            'todayDate': datetime.now().strftime("%d %B, %Y %H:%M:%S"), 
+            'deliveryDate': deliveryDay.strftime("%d %B, %Y"),
+        }
+        return render( request, 'cart/confirmed.html', context)
+    except:
+        messages.info( request, 'Whoa! Mistake from our side. Please keep browsing.')
+        return redirect( 'food-delivery-home')
+
+# transferring to home page after the payment with deletion of objects
+@login_required
+def confirmedDelete( request):
+    for foodInfo in request.user.cart.foodinfo_set.all():
+        foodInfo.delete()
+    
+    messages.success( request, 'Your order is ordered. It is arriving in 3 days!')
+    return redirect('food-delivery-home')
+    
