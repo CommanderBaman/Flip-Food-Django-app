@@ -24,9 +24,32 @@ Flip Food
                         <i class="fas fa-rupee-sign"></i>{{food.price}}
                     </span> 
                 </div>
-                <a href="{% url 'cart-cart-create-item' food.pk %}" class="btn btn-primary p-2 m-2">
-                    Add to Cart <i class="fas fa-shopping-cart"></i>
-                </a>
+                <div class="ninja-container">
+                    {% if noFoods %}
+                        <a href="{% url 'cart-cart-create-item' food.pk %}" class="btn btn-primary p-2 m-2">
+                            Add to Cart <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    {% else %}
+                        {% for foodInfo in foodInfos %}
+                            {% if food.id == foodInfo.food.id %}
+                                <div class="ninja-nocart">
+                                    Item already in cart <br>
+                                    <div class="d-lg-inline" style="font-size: 1.2em;">
+                                        <a href="{% url 'cart-cart-quantity-handler' foodInfo.id 1 1 %}" class="text-success"><i class="fas fa-plus-square"></i></a> 
+                                        {{ foodInfo.quantity }}
+                                        <a href="{% url 'cart-cart-quantity-handler' foodInfo.id 0 1 %}" class="text-danger"><i class="fas fa-minus-square"></i></a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="ninja-cart">
+                            <a href="{% url 'cart-cart-create-item' food.pk  %}" class="btn btn-primary p-2 m-2">
+                                Add to Cart <i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+
             </div>
             <div class="clear" style="content:'';clear:both;"></div>
         </div>
@@ -53,5 +76,26 @@ Flip Food
         {% endif %}
     </div>
     <div class="m-5" style="content:'a'"></div>
+
+
+
+    <script>
+    ninjaContainer = document.getElementsByClassName( 'ninja-container')
+
+        for(let i=0; i < ninjaContainer.length; i++) {
+            console.log( i);
+            let specificContianer = ninjaContainer[i];
+            console.log(specificContianer);
+            let ninjaNoCart = specificContianer.getElementsByClassName( 'ninja-nocart');
+            console.log( ninjaNoCart);
+
+            if ( ninjaNoCart.length > 0) {
+                let ninjaCart = specificContianer.getElementsByClassName( 'ninja-cart');
+                console.log( ninjaCart);
+                ninjaCart[0].style.display = 'none';
+            }
+        }
+
+    </script>
 {% endblock main-content %}
 

@@ -20,7 +20,16 @@ class FoodListView( ListView):
     template_name = 'food_delivery/main.html'
     context_object_name = 'foods'
     ordering = ['-datePosted']
-    paginate_by = 8
+    paginate_by = 4
+
+    def get_context_data( self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        try:
+            context['foodInfos'] = self.request.user.cart.foodinfo_set.all()
+            context['noFoods'] = False
+        except:
+            context['noFoods'] = True
+        return context
 
 # see details of a single food object
 class FoodDetailView( DetailView):

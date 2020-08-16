@@ -7,7 +7,7 @@
 {% block main-content %}
 
 {% if foodInfos.count %}
-	<table class="table text-center w-100">
+	<table class="table text-center w-100 mx-auto">
 		<thead>
 			<tr>
 				<th scope="col">S.No.</th>
@@ -24,9 +24,9 @@
 					<td>{{ foodInfo.food.name }}</td>
 					<td>
 						<div class="d-lg-inline">
-							<a href="{% url 'cart-cart-quantity-handler' foodInfo.id 1 %}" class="text-success"><i class="fas fa-plus-square"></i></a> 
+							<a href="{% url 'cart-cart-quantity-handler' foodInfo.id 1 0 %}" class="text-success"><i class="fas fa-plus-square"></i></a> 
 							{{ foodInfo.quantity }}
-							<a href="{% url 'cart-cart-quantity-handler' foodInfo.id 0 %}" class="text-danger"><i class="fas fa-minus-square"></i></a>
+							<a href="{% url 'cart-cart-quantity-handler' foodInfo.id 0 0 %}" class="text-danger"><i class="fas fa-minus-square"></i></a>
 						</div>
 					</td>
 					<td>{{ foodInfo.food.actualValue }}</td>
@@ -58,7 +58,7 @@
 			Let's add something here
 		</a>
 	</div>
-	{% endif %}
+{% endif %}
 <div class="m-2 text-muted text-center mb-5 pb-5">
 	Last Edited on: {{ user.cart.datePosted|date:'F d, Y' }}
 </div>
