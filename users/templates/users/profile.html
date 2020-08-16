@@ -16,7 +16,11 @@
             Email: <a href="mailto:{{ user.email }}">{{ user.email }}</a> <br>
             Address: {{ user.address }}
         </p> 
-
+        <div class="text-center m-3">
+            <div class="btn btn-secondary p-2 text-center mt-3" id="update-button">
+                Update your Information
+            </div>
+        </div>
         <div class="mt-4">
             If you want to sell food, create a page for your food on our page. 
             <div class="text-center">
@@ -25,16 +29,17 @@
                 </a>
             </div>
         </div>
-
+        <div class="mt-4">
+        </div>
     </div>
 </div>    
 
 
 <!-- user Information Update form -->
-<form method="post"  enctype="multipart/form-data" class="mb-5 pb-3">  <!-- this enctype is for image to save properly -->
+<form method="post"  enctype="multipart/form-data" class="mb-5 pb-3 d-none" id="update-form">  <!-- this enctype is for image to save properly -->
     {% csrf_token %}
     <fieldset class="form-group">
-        <legend class="mt-4 mb-4">Profile Info</legend>
+        <legend class="mt-4 mb-4 text-center">Profile Info</legend>
         {{ userUpdateForm|crispy }}
         {{ profileUpdateForm|crispy }}
     </fieldset>
@@ -44,4 +49,16 @@
         </button>
     </div>
 </form>
+
+<script>
+    const updateForm = document.getElementById( 'update-form');
+    const updateBtn = document.getElementById( 'update-button');
+
+    updateBtn.onclick = function() {
+        updateForm.classList.toggle("d-none");
+        updateBtn.classList.toggle( "d-none");
+    }
+
+</script>
+
 {% endblock main-content %}
