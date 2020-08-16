@@ -64,8 +64,16 @@ def checkout( request):
     except:
         messages.error( request, 'Please add something to your cart before proceeding to payment!')
         return redirect( 'food-delivery-home')
+
+    try:
+        userAddress = request.user.profile.address_set.all()[0]
+    except:
+        messages.error( request, 'Looks like you haven\'t added your address till now. Let\'s update it below.')
+        return redirect( 'users-register-profile')
+
     context = {
-        'foodInfos': foodInfos
+        'foodInfos': foodInfos, 
+        'userAddress': userAddress,
     }
     messages.warning( request, "This is a dummy site - meaning it will not send you food. But the transaction link below is real and will cost you. Please leave if you think you are ordering actual food.")
     return render( request, 'cart/checkout.html', context)
@@ -78,12 +86,13 @@ def confirmed( request):
     try:
         foodInfos = request.user.cart.foodinfo_set.all()
         foodInfo = foodInfos[0]
-        print( foodInfo)
         messages.success( request, 'Food Ordered! Food to arrive in 3 days. Happy Meal.')
+        userAddress = request.user.profile.address_set.all()[0]
         context = {
             'foodInfos': foodInfos,
             'todayDate': datetime.now().strftime("%d %B, %Y %H:%M:%S"), 
             'deliveryDate': deliveryDay.strftime("%d %B, %Y"),
+            'userAddress': userAddress,
         }
         return render( request, 'cart/confirmed.html', context)
     except:

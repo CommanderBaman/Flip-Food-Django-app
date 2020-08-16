@@ -38,8 +38,8 @@
             <td colspan="2"><i class="fas fa-rupee-sign"></i>{{ user.cart.totalCost }} = ${{ user.cart.totalCost|convertDollar }}</td>
         </tr>
         <tr>
-            <td colspan="3" class="border-right">Savings</td>
-            <td colspan="2"><i class="fas fa-rupee-sign"></i>{{ user.cart.totalSavings }}</td>
+            <td class="border-right">Address</td>
+            <td colspan="4">{{ userAddress.localityAddress }}, {{ userAddress.city }}, {{ userAddress.state }}, PIN: {{ userAddress.pin }}</td>
         </tr>
     </tbody>
 </table>
@@ -50,9 +50,9 @@
     </a>    
 </div>
 
-<div class="m-2 text-muted text-center mb-5 pb-5">
+<!-- <div class="m-2 text-muted text-center mb-5 pb-5">
 	Last Edited on: {{ user.cart.datePosted|date:'F d, Y' }}
-</div>
+</div> -->
 
 
 <script src="https://www.paypal.com/sdk/js?client-id=AZrQ8Q0mjzSzyzEeao1S2UmwChoDqSzY4lTq3YjIiGmLL8Z511zrNiV5PuPUIIwnHBUyqrPg7Wv0W2MC"></script>

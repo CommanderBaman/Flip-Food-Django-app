@@ -13,8 +13,12 @@
     <div class="col-lg-6 py-4 px-4 m-3">
         <h2>{{ user.username }} </h2>
         <p>
-            Email: <a href="mailto:{{ user.email }}">{{ user.email }}</a> <br>
-            Address: {{ user.address }}
+            {% if userProfile.first_name or userProfile.last_name %}
+            Name: {{userProfile.first_name}} {{userProfile.last_name}} <br>
+            {% else %}
+            {% endif %}
+            Email: <a href="mailto:{{ user.email }}">{{ userProfile.email }}</a> <br>
+            Address: {{ userAddress.localityAddress }}, {{ userAddress.city }}, {{ userAddress.state }}, PIN: {{ userAddress.pin }}
         </p> 
         <div class="text-center m-3">
             <div class="btn btn-secondary p-2 text-center mt-3" id="update-button">

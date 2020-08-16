@@ -101,6 +101,8 @@ def profile( request):
         'userUpdateForm' : userUpdateForm, 
         'profileUpdateForm': profileUpdateForm, 
         'addressUpdateForm': addressUpdateForm, 
+        'userProfile': request.user, 
+        'userAddress': request.user.profile.address_set.all()[0],
     }
     return render( request, 'users/profile.html', context)
 
@@ -108,7 +110,8 @@ def profile( request):
 def profileViewer( request, userPK):
     profile = get_object_or_404( User, pk = userPK)
     context = {
-        'userProfile':profile, 
-        'userAddress': profile,
+        'userProfile': profile, 
+        'userAddress': profile.profile.address_set.all()[0],
     }
+
     return render( request, 'users/profile-viewer.html', context)
