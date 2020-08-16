@@ -6,10 +6,13 @@ Join Today
 {% endblock header %}
 
 {% block main-content %}
-<form method="post">
+<form method="post" class="mb-5 pb-5">
     {% csrf_token %}
+    <p>You need to add more Information before you can proceed</p>
+    
     <fieldset class="form-group">
         {{ form|crispy }}
+        {{ form2|crispy }}
     </fieldset>
     <div class="form-group text-center">
         <button class="btn btn-outline-info px-5 w-25" type="submit">
@@ -17,9 +20,4 @@ Join Today
         </button>
     </div>
 </form>
-<div class="border-top p-3 mb-5 pb-5 ">
-        <div class="text-muted ">
-            Do you have an account? <a href="{% url 'users-login' %}">Sign In</a>
-        </div>
-</div>
 {% endblock main-content %}

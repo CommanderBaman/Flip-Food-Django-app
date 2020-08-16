@@ -15,3 +15,8 @@ def create_profile( sender, instance, created, **kwargs):
 @receiver( post_save, sender= User)
 def save_profile( sender, instance, **kwargs):
     instance.profile.save()
+
+    # creating an address item on save of profile
+    if kwargs['created']:
+        addressItem = instance.profile.address_set.create( profile= instance.profile)
+        addressItem.save()

@@ -42,11 +42,15 @@
         <legend class="mt-4 mb-4 text-center">Profile Info</legend>
         {{ userUpdateForm|crispy }}
         {{ profileUpdateForm|crispy }}
+        {{ addressUpdateForm|crispy }}
     </fieldset>
     <div class="form-group text-center">
         <button class="btn btn-outline-info px-5" type="submit">
             Update
         </button>
+        <a href="{% url 'users-profile' %}" class="btn btn-outline-danger px-5" >
+            Cancel Update
+        </a>
     </div>
 </form>
 

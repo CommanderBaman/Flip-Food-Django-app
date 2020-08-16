@@ -13,4 +13,5 @@ urlpatterns = [
     path( 'password-reset/done/', auth_views.PasswordResetDoneView.as_view( template_name='users/password-reset-done.html'), name= 'password_reset_done'), # these 3 need to be this because of convention
     path( 'password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view( template_name='users/password-reset-confirm.html'), name= 'password_reset_confirm'),
     path( 'password-reset-complete/', auth_views.PasswordResetCompleteView.as_view( template_name='users/password-reset-complete.html'), name= 'password_reset_complete'),
+    path( 'register/profile/', views.profileRegister, name= 'users-register-profile'),
 ]
