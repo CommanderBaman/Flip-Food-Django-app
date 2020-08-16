@@ -58,6 +58,10 @@ def profileRegister( request):
             # username = form.cleaned_data.get( 'username')
             messages.success( request, 'Your account was created successfully! Let\'s eat food.')
             return redirect( 'food-delivery-home')
+        
+        else:
+            messages.error( request, "Something wrong happened. Please check your information again.")
+
     else:
         form = ProfileUpdateForm()
         form2 = AddressUpdateForm()

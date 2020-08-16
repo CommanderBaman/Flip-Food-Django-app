@@ -26,25 +26,25 @@ class Profile( models.Model):
 
 class Address( models.Model):
     # linking to profile
-    profile = models.ForeignKey( Profile, on_delete= models.CASCADE, null= True, blank= True)
+    profile = models.ForeignKey( Profile, on_delete= models.CASCADE, default= 1)
     # loading cities
     cityJSONfile = 'https://raw.githubusercontent.com/nshntarora/Indian-Cities-JSON/master/cities.json'
     res = requests.get( cityJSONfile)
     cityDict = json.loads( res.text)
-    cityChoices = [( str( city["name"]), str( city["name"])) for city in cityDict]
+    cityChoices = [( str( city["state"]), str( city["name"])) for city in cityDict]
 
-    city = models.CharField( max_length= 120, choices= cityChoices, null= True, blank= True)
+    city = models.CharField( max_length= 120, choices= cityChoices, default='Your city here')
 
     # loading states
-    stateChoices = [( str( state["state"]), str( state["state"])) for state in cityDict]
+    stateChoices = set([( str( state["state"]), str( state["state"])) for state in cityDict])
     # stateChoices = set( stateChoices)
-    state = models.CharField( max_length= 120, choices= stateChoices, null= True, blank= True)
+    state = models.CharField( max_length= 120, choices= stateChoices, default= 'Your state here')
 
     # PIN number of the city the person is living in
     pin = models.IntegerField( default= 160019)
 
     # address line
-    localityAddress = models.TextField( max_length= 180, null= True, blank= True)
+    localityAddress = models.TextField( max_length= 180, default= 'Your local address here', help_text="Enter your house number and the society name here")
 
     def __str__(self):
         return "{}'s Address - Line {}".format( self.profile.user.username, self.id)
