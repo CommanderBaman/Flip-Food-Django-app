@@ -8,7 +8,7 @@ import json, requests
 
 class Profile( models.Model):
     user = models.OneToOneField( User, on_delete= models.CASCADE)
-    image = models.ImageField( default= 'profile_pics/default-profile-pic.jpg', upload_to= 'profile_pics')
+    image = models.ImageField( default= 'profile_pics/default-profile-pic.jpg', upload_to= 'profile_pics', blank= True)
     
 
     def __str__( self):
@@ -44,7 +44,7 @@ class Address( models.Model):
     pin = models.IntegerField( default= 160019)
 
     # address line
-    localityAddress = models.TextField( max_length= 180, default= 'Your local address here', help_text="Enter your house number and the society name here")
+    localityAddress = models.CharField( max_length= 180, default= 'Your local address here', help_text="Enter your house number and the society name here")
 
     def __str__(self):
         return "{}'s Address - Line {}".format( self.profile.user.username, self.id)

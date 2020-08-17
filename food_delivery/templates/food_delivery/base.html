@@ -13,56 +13,73 @@
 	<!-- bootstrap CSS  -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<!-- FontAwesome Icons -->
-    <script src="https://kit.fontawesome.com/4106bd1142.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/4106bd1142.js" crossorigin="anonymous"></script>
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
 </head>
 <body>
 	<!-- 
 		Color Scheme:
-		white = #ECECEC
-		red = #F78888
-		yellow = #F3D250
-		light blue = #90CCF4
-		blue = #5DA2D5
+		white = #F3E0DC
+		red = #BC4639
+		cream = #D4A59A
+		light blue = #4285F4
+		dark brown = #5C2018
 	-->
 
 	<!-- making navbar  -->
-	<nav class="navbar navbar-expand-md navbar-fixed-top">
-		<a class="navbar-brand" href="#"><img src="{% static 'food_delivery/foodflip-logo.png' %}" alt="FoodFlip Logo"></a>
-		<button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="main-navigation">
-			<ul class="navbar-nav">
-				<!-- {% if title != '' %} -->
-				<li class="nav-item">
-					<a class="nav-link" href="{% url 'food-delivery-home' %}">Home</a>
-				</li>
-				<!-- {% endif %} -->
-				<li class="nav-item">
-					<a class="nav-link" href="{% url 'food-delivery-about' %}">About Us</a>
-				</li>
-				{% if user.is_authenticated %}
-				<li class="nav-item">
-					<a class="nav-link" href="{% url 'cart-cart' %}">Cart <i class="fas fa-shopping-cart" style="font-size: 1.3em;"></i></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{% url 'users-logout' %}">Logout</a>
-				</li>
-				<li class="nav-item">
-					<a href="{% url 'users-profile' %}" class="nav-link">Welcome! {{user.username}}</a>
-				</li>
-				{% else %}
-					<li class="nav-item">
-						<a class="nav-link" href="{% url 'users-login' %}">Login</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{% url 'users-register' %}">Register</a>
-					</li>
-				{% endif %}
-			</ul>
-		</div>
-	</nav>
 
+	<div class="upper-part">
+		<nav class="navbar navbar-expand-md navbar-fixed-top">
+			<!-- <a class="navbar-brand" href="#"><img src="{% static 'food_delivery/foodflip-logo.png' %}" alt="FoodFlip Logo"></a> -->
+			<button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="main-navigation">
+				<ul class="navbar-nav">
+					<!-- {% if title != '' %} -->
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'food-delivery-home' %}">Home</a>
+					</li>
+					<!-- {% endif %} -->
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'food-delivery-about' %}">About Us</a>
+					</li>
+					{% if user.is_authenticated %}
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'cart-cart' %}">Cart <i class="fas fa-shopping-cart" style="font-size: 1.3em;"></i></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'users-logout' %}">Logout</a>
+					</li>
+					<li class="nav-item">
+						<a href="{% url 'users-profile' %}" class="nav-link">Welcome! {{user.username}}</a>
+					</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'users-login' %}">Login</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link btn btn-danger" href="{% url 'users-register' %}" id="register-btn">Register</a>
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+		</nav>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="py-5">
+					<h1 class="text-center py-5">
+						{% block header %}
+						{% endblock header %}
+					</h1>
+				</div>
+			</div>
+			<div class="col-md-6"></div>
+		</div>
+		
+	</div>
 	<div class="container-lg">
 		{% if messages %}
 			{% for message in messages %}
@@ -77,11 +94,8 @@
 				{% endif %}
 			{% endfor %}
 		{% endif %}
-		<h1 class="text-center py-5">
-			{% block header %}
-			{% endblock header %}
-		</h1>
-		<div class="main-content">
+
+		<div class="main-content pb-4">
 			{% block main-content %}
 			{% endblock main-content %}
 		</div>
@@ -90,7 +104,7 @@
 	<!-- making footer -->
 	<footer class="page-footer font-small fixed-bottom text-center py-3">
 		<div class="container-lg">
-			<div class="footer-copyright text-muted">
+			<div class="footer-copyright" id="footer-all">
 				<i class="far fa-copyright"></i> 2020 Copyright: <a href="https://commanderbaman.github.io/19D070056_WEB_DEV/">Shubham Ojha</a> 
 			</div>
 		</div>

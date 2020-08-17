@@ -1,5 +1,4 @@
 from django import template
-import numpy as np
 import decimal
 
 register = template.Library()

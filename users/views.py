@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
 # forms for registering and updating information
@@ -50,7 +49,7 @@ def profileRegister( request):
         form2 = AddressUpdateForm(
             request.POST, # for updating with the post data
             request.FILES, # for updating the image 
-            instance= request.user.profile
+            instance= request.user.profile.address_set.get( profile= request.user.profile)
         )
         if form.is_valid() and form2.is_valid():
             form.save()

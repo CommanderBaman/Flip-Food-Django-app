@@ -15,15 +15,18 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY WARNING: keep the secret key used in production secret
 SECRET_KEY = 'rk#9bsac3h!0h68-pah64bu$ko#p#9@r3bng1_+^sdboj*2b)t'
 
+with open(os.path.join( BASE_DIR, 'ls_webdev_project', 'secret_key.txt')) as f:
+    SECRET_KEY = f.read().strip()
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -146,7 +149,15 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-#using the environment variables to access the username and password 
-EMAIL_HOST_USER = 'shubhamojha18@gmail.com'
-EMAIL_HOST_PASSWORD = 'okiwiwmqehfsgzzh'
+with open(os.path.join( BASE_DIR, 'ls_webdev_project', 'gmail_id.txt')) as f:
+    EMAIL_HOST_USER = f.read().strip()
+
+with open(os.path.join( BASE_DIR, 'ls_webdev_project', 'gmail_pwd.txt')) as f:
+    EMAIL_HOST_PASSWORD = f.read().strip()
+
+# print(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD)
+
 DEFAULT_FROM_EMAIL = 'FlipFood <noreply@foodflip.com>'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# modules to install pillow requests django-crispy-forms
