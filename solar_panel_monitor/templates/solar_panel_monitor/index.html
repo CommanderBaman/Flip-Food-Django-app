@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Solar Panel Monitor</title>
+</head>
+
+<body>
+	<!-- personal CSS -->
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'solar_panel_monitor/style.css' %}">
+	<link rel="shortcut icon" type="image/png" href="{% static 'solar_panel_monitor/favicon.ico' %}" />
+
+	{% if messages %}
+		{% for message in messages %}
+			{% if message.tags == 'error' %}
+			<div class="alert alert-danger">
+				{{ message }}
+			</div>
+			{% else %}
+			<div class="alert alert-{{ message.tags }}">
+				{{ message }}
+			</div>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+
+	<div class="solar-panel">
+		<div class="box">
+			<h1>Solar Panel Monitor</h1>
+			<form class="solar-value-input-form" action="" method="POST">
+				<p>Meter Ratings on:</p>
+				<div class="indent">
+					{% csrf_token %}
+					{{ ValueInputForm }}
+				</div>
+				<label for="password">Enter Password:</label>
+				<input type="password" name="password" id="password" required>
+
+				<input type="submit" value="submit" id="submit-button">
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

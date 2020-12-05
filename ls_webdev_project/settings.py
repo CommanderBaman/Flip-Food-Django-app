@@ -19,7 +19,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret
-SECRET_KEY = 'rk#9bsac3h!0h68-pah64bu$ko#p#9@r3bng1_+^sdboj*2b)t'
 
 with open(os.path.join( BASE_DIR, 'ls_webdev_project', 'secret_key.txt')) as f:
     SECRET_KEY = f.read().strip()
@@ -46,6 +45,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'crispy_forms', # need to install the django-crispy-forms from pip
     'cart.apps.CartConfig',
+		'solar_panel_monitor.apps.SolarPanelMonitorConfig',
 ]
 
 MIDDLEWARE = [

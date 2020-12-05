@@ -25,6 +25,7 @@ urlpatterns = [
     path( '', include( 'food_delivery.urls')),
     path( 'users/', include( 'users.urls')),
     path( 'cart-handler/', include( 'cart.urls')),
+		path( "solar/", include( "solar_panel_monitor.urls")),
 ] + static( settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
 

@@ -1,0 +1,81 @@
+body {
+	background-color: black;
+	font-size: 24px;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	color: white;
+}
+
+.alert {
+	width: 80%;
+	height: auto;
+	text-align: center;
+	margin: auto;
+	margin-top: 1%;
+	background-color: green;
+}
+
+.alert.alert-danger {
+	background-color: red;
+}
+
+.solar-panel .small {
+	font-size: small;
+}
+
+.solar-panel .box {
+	width: 60vw;
+	height: 60vh;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	background-color: #111111;
+	border: 10px solid white;
+	padding: 5%;
+}
+
+.solar-panel .box h1 {
+	text-align: center;
+	width: 100%;
+}
+
+.solar-panel .box form {
+	width: 100%;
+	height: auto;
+}
+
+.solar-panel .box form .indent {
+	margin-left: 20px;
+}
+
+.solar-panel .box form label{
+	width: 100%;
+} 
+
+.solar-panel .box form input {
+	width: 20%;
+	height: 20%;
+	margin: auto;
+}
+
+.solar-panel .box form input#submit-button {
+	width: 20%;
+	height: 20%;
+	margin: auto;
+	background-color: green;
+}
+
+
+
+/* Chrome, Safari, Edge, Opera */
+.solar-panel .box form input::-webkit-outer-spin-button,
+.solar-panel .box form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.solar-panel .box form input[type=number] {
+  -moz-appearance: textfield;
+}
